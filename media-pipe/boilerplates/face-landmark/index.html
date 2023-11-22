@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>face-landmark</title>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <title>Face Landmarker</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/index.js"></script>
+</head>
+
+<body>
+  <header class="header">
+    <h2>Webcam continuous face landmarks detection</h2>
+    <p>Hold your face in front of your webcam to get real-time face landmarker detection.</br>Click <b>enable
+        webcam</b> below and grant access to the webcam if prompted.</p>
+  </header>
+  <section id="demos" class="invisible">
+
+
+    <div id="liveView" class="video-view">
+      <button id="webcamButton" class="btn">
+        <span class=""></span>
+        <span class="">ENABLE WEBCAM</span>
+      </button>
+      <div class="media-container">
+        <video id="webcam" class="webcam" autoplay playsinline></video>
+        <canvas class="output_canvas" id="output_canvas"></canvas>
+      </div>
+      <div class="blend-shapes">
+        <ul class="blend-shapes-list" id="video-blend-shapes"></ul>
+      </div>
+    </div>
+  </section>
+
+
+</body>
+
+</html>

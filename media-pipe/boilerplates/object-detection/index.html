@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="js/index.js"></script>
+</head>
+
+<body>
+  <section id="demos" class="invisible">
+    <h2>Demo: Webcam continuous classification</h2>
+    <p>Hold some objects up close to your webcam to get real-time classification. For best results, avoid having too
+      many objects visible to the camera.</br>Click <b>enable webcam</b> below and grant access to the webcam if
+      prompted.</p>
+
+    <div class="webcam">
+      <button id="webcamButton" class="mdc-button mdc-button--raised">
+        <span class="mdc-button__ripple"></span>
+        <span class="mdc-button__label">ENABLE WEBCAM</span>
+      </button>
+      <video id="webcam" autoplay playsinline></video>
+      <p id="webcamPredictions" class="webcamPredictions removed"></p>
+    </div>
+  </section>
+
+</body>
+
+</html>
