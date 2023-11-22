@@ -10,19 +10,22 @@
 </head>
 
 <body>
-  <section id="demos" class="invisible">
-    <h2>Demo: Webcam continuous classification</h2>
+  <header class="header">
+    <h2>Webcam continuous classification</h2>
     <p>Hold some objects up close to your webcam to get real-time classification. For best results, avoid having too
       many objects visible to the camera.</br>Click <b>enable webcam</b> below and grant access to the webcam if
       prompted.</p>
-
-    <div class="webcam">
-      <button id="webcamButton" class="mdc-button mdc-button--raised">
-        <span class="mdc-button__ripple"></span>
-        <span class="mdc-button__label">ENABLE WEBCAM</span>
+  </header>
+  <section id="demos" class="invisible">
+    <div id="liveView" class="video-view">
+      <button id="webcamButton" class="btn">
+        <span></span>
+        <span>ENABLE WEBCAM</span>
       </button>
-      <video id="webcam" autoplay playsinline></video>
-      <p id="webcamPredictions" class="webcamPredictions removed"></p>
+      <div class="media-container">
+        <video id="webcam" class="webcam" autoplay playsinline></video>
+        <p id="webcamPredictions" class="webcamPredictions removed"></p>
+      </div>
     </div>
   </section>
 

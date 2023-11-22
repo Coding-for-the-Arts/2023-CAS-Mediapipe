@@ -12,9 +12,7 @@ let webcamRunning = false;
 const videoHeight = "360px";
 const videoWidth = "480px";
 
-const imageContainers = document.getElementsByClassName(
-  "classifyOnClick"
-);
+const imageContainers = document.getElementsByClassName("classifyOnClick");
 let runningMode = "IMAGE";
 
 // Add click event listeners for the img elements.
@@ -45,11 +43,8 @@ const createImageClassifier = async () => {
   // Show demo section now model is ready to use.
   demosSection.classList.remove("invisible");
 };
-createImageClassifier();
-/********************************************************************
-// Demo 2: Continuously grab image from webcam stream and classify it.
-********************************************************************/
 
+createImageClassifier();
 // Check if webcam access is supported.
 function hasGetUserMedia() {
   return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
