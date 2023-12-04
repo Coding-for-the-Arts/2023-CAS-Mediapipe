@@ -6,6 +6,13 @@
     align-items: center;
 }
 
+.center {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .header {
     font-family: 'Courier New', Courier, monospace;
     border-radius: 10px;
@@ -35,26 +42,24 @@
 }
 
 .webcam {
+    display: none;
     border: solid #33f;
     border-radius: 10px;
 }
 
 .output_canvas {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.blend-shapes{
+.blend-shapes {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.blend-shapes-value{
+.blend-shapes-value {
     position: absolute;
     width: auto;
     background-color: #f33;
-}
-
-.invisible{
-    visibility: hidden;
 }
