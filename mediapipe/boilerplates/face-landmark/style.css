@@ -1,6 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .video-view,
 .header {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,22 +46,73 @@
 }
 
 .webcam {
+    display: none;
     border: solid #33f;
     border-radius: 10px;
 }
 
 .output_canvas {
     position: absolute;
-    left: 0px;
-    top: 0px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
 }
 
-.blend-shapes{
+.blend-shapes {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.blend-shapes-value{
+.blend-shapes-value {
     position: absolute;
     width: auto;
     background-color: #f33;
+}
+
+#face, #facemesh {
+    position: fixed;
+    width: 75%;
+    height: 75vh;
+    background-color: bisque;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+#facemesh{
+    background-color: transparent;
+    border: solid 5px red;
+}
+
+#left-eye, #right-eye {
+    position: absolute;
+    /* left: 100px; */
+    top: 15%;
+    height: 10%;
+    width: 25%;
+    background-color: white;
+    border: solid 3px black;
+}
+
+#left-eye{
+    left: 100px;
+}
+
+#right-eye {
+    right: 100px;
+}
+
+#mouth {
+    position: absolute;
+    width: 20%;
+    height: 20px;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: white;
+    border: solid 10px #f33;
+}
+
+.dot{
+    position: absolute;
+    font-size: 10px;
 }

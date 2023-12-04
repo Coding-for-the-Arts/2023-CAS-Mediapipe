@@ -64,22 +64,53 @@ async function runStreamingAudioClassification() {
     // Classify the audio
     const result = audioClassifier.classify(inputData);
     const categories = result[0].classifications[0].categories;
-    console.log(categories);
+    // console.log(categories);
+
+    const start = 0
+    const end = 5
+    let text = ''
+    let r = '255', g = '255', b = '255'
+    for (let i = 0; i < end; i++) {
+      const category_name = categories[i].categoryName;
+      const score = categories[i].score.toFixed(3);
+      let font_size = 20
+      if(i === 0){font_size = 40}
+      // text += `<span style="font-size: ${font_size}px">Item ${i}: ${category_name} (${score})</span> <br>`
+      text += '<span style="font-size: ' + font_size + 'px">Item ' + i+': '+ category_name + ' (' + score +')</span> <br>'
+      if (category_name === 'Silence') {
+        r = (score * 255).toString()
+        console.log('R: ', r);
+      } 
+      if (category_name === 'Speech' || category_name === 'Laughter') {
+        g = (score * 255).toString()
+        console.log('G: ', g);
+      } 
+      if (category_name === 'Ding' || category_name === 'Water' || category_name === 'Glass') {
+        b = (score * 255).toString()
+        console.log('B: ', b);
+      } 
+      const gradient = `linear-gradient(to bottom, rgb(${r}, 51, 51), rgb(51, ${g}, 51), rgb(51, 51, ${b}))`
+      console.log(gradient);
+      document.body.style.background = gradient
+    }
+
+    output.innerHTML = text
+
 
     // Display results
-    output.innerText =
-      categories[0].categoryName +
-      "(" +
-      categories[0].score.toFixed(3) +
-      ")\n" +
-      categories[1].categoryName +
-      "(" +
-      categories[1].score.toFixed(3) +
-      ")\n" +
-      categories[2].categoryName +
-      "(" +
-      categories[2].score.toFixed(3) +
-      ")";
+    // output.innerText =
+    //   categories[0].categoryName +
+    //   "(" +
+    //   categories[0].score.toFixed(3) +
+    //   ")\n" +
+    //   categories[1].categoryName +
+    //   "(" +
+    //   categories[1].score.toFixed(3) +
+    //   ")\n" +
+    //   categories[2].categoryName +
+    //   "(" +
+    //   categories[2].score.toFixed(3) +
+    //   ")";
   };
 
   source.connect(scriptNode);

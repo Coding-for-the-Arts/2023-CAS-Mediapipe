@@ -1,5 +1,10 @@
+body {
+    height: 97vh;
+}
+
 .video-view,
-.header, .audio-classifier {
+.header,
+.audio-classifier {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -45,16 +50,16 @@
     top: 0px;
 }
 
-.blend-shapes{
+.blend-shapes {
     font-family: 'Courier New', Courier, monospace;
 }
 
-.blend-shapes-value{
+.blend-shapes-value {
     position: absolute;
     width: auto;
     background-color: #f33;
 }
 
-.invisible{
+.invisible {
     visibility: hidden;
 }

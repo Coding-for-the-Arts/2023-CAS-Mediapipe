@@ -16,25 +16,23 @@
 </head>
 
 <body>
-  <header class="header">
-    <h2>Webcam continuous face landmarks detection</h2>
-    <p>Hold your face in front of your webcam to get real-time face landmarker detection.</br>Click <b>enable
-        webcam</b> below and grant access to the webcam if prompted.</p>
-  </header>
+  <div id="face">
+    <div id="left-eye"></div>
+    <div id="right-eye"></div>
+    <div id="mouth"></div>
+  </div>
+  
+  <div id="facemesh"></div>
+
   <section id="demos" class="invisible">
-
-
     <div id="liveView" class="video-view">
       <button id="webcamButton" class="btn">
         <span class=""></span>
         <span class="">ENABLE WEBCAM</span>
       </button>
-      <div class="media-container">
+      <div class="media-container center">
         <video id="webcam" class="webcam" autoplay playsinline></video>
         <canvas class="output_canvas" id="output_canvas"></canvas>
-      </div>
-      <div class="blend-shapes">
-        <ul class="blend-shapes-list" id="video-blend-shapes"></ul>
       </div>
     </div>
   </section>
