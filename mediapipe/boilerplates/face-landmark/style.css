@@ -52,6 +52,7 @@ body {
 }
 
 .output_canvas {
+    display: none;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -94,11 +95,11 @@ body {
 }
 
 #left-eye{
-    left: 100px;
+    left: 10%;
 }
 
 #right-eye {
-    right: 100px;
+    right: 10%;
 }
 
 #mouth {

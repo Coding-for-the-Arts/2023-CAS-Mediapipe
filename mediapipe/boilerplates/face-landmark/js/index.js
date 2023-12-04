@@ -163,14 +163,30 @@ const facemesh = document.querySelector('#facemesh')
 const facemesh_bounds = facemesh.getBoundingClientRect()
 const w = facemesh_bounds.width
 const h = facemesh_bounds.height
+const face = document.querySelector('#face')
+console.log(face);
 const left_eye = document.querySelector('#left-eye')
 const right_eye = document.querySelector('#right-eye')
 const mouth = document.querySelector('#mouth')
+
+const top = 10
+const bottom = 152
+const left = 234
+const right = 454
+const eye_l = 468
+const eye_r = 473
+const nose = 4
+const mouth_top = 13
+const mouth_bottom = 14
+
+const y = facemesh_bounds.top
+const x = facemesh_bounds.left
 
 function draw_face(landmarks) {
   facemesh.innerHTML = ''
   // console.log(landmarks[0]);
   if (landmarks[0] !== undefined) {
+    // landmarks = landmarks[0]
     // console.log(landmarks[0]);
     for (let i = 0; i < landmarks[0].length; i++) {
       // console.log(i);
@@ -185,6 +201,30 @@ function draw_face(landmarks) {
         facemesh.appendChild(lm)
       }
     }
+    const lms = landmarks[0]
+    console.log(lms[bottom]);
+    const face_h = (lms[bottom]['y'] * h) - (lms[top]['y'] * h)
+    const face_w = (lms[right]['x'] * w) - (lms[left]['x'] * w)
+
+    face.style.width = `${face_w}px`
+    face.style.height = `${face_h}px`
+
+    const center_x = (lms[nose]['x'] * w) + x
+    const center_y = (lms[nose]['y'] * h) + y
+    face.style.left = `${center_x}px`
+    face.style.top = `${center_y}px`
+
+    // const left_eye_x = ((lms[eye_l]['x'] * w) - (center_x)) 
+    // const left_eye_y = ((center_y) - (lms[eye_l]['y'] * h))
+    // left_eye.style.left = `${left_eye_x}px`
+    // left_eye.style.top = `${left_eye_y}px`
+    // const right_eye_x = ((lms[eye_r]['x']) * face_w) 
+    // const right_eye_y = (lms[eye_r]['y'] * face_h)
+    // right_eye.style.left = `${left_eye_x}px`
+    // right_eye.style.top = `${left_eye_y}px`
+
+    // console.log(object);
+
   }
 }
 
