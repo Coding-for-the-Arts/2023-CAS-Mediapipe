@@ -85,35 +85,38 @@ body {
 }
 
 #left-eye, #right-eye {
-    position: absolute;
+    position: fixed;
     /* left: 100px; */
     top: 15%;
     height: 10%;
-    width: 25%;
+    width: 30px;
+    height: 30px;
     background-color: white;
     border: solid 3px black;
+    transform: translate(-50%, -50%);
 }
 
 #left-eye{
-    left: 10%;
+    /* left: 10%; */
 }
 
 #right-eye {
-    right: 10%;
+    /* right: 10%; */
+    background-color: #f33;
 }
 
 #mouth {
-    position: absolute;
+    position: fixed;
     width: 20%;
     height: 20px;
     bottom: 20%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, -50%);
     background-color: white;
     border: solid 10px #f33;
 }
 
 .dot{
-    position: absolute;
+    position: fixed;
     font-size: 10px;
 }

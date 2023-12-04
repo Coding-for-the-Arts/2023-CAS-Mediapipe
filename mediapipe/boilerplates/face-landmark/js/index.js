@@ -161,8 +161,8 @@ async function predictWebcam() {
 
 const facemesh = document.querySelector('#facemesh')
 const facemesh_bounds = facemesh.getBoundingClientRect()
-const w = facemesh_bounds.width
-const h = facemesh_bounds.height
+const w = innerWidth
+const h = innerHeight
 const face = document.querySelector('#face')
 console.log(face);
 const left_eye = document.querySelector('#left-eye')
@@ -202,7 +202,7 @@ function draw_face(landmarks) {
       }
     }
     const lms = landmarks[0]
-    console.log(lms[bottom]);
+    // console.log(lms[bottom]);
     const face_h = (lms[bottom]['y'] * h) - (lms[top]['y'] * h)
     const face_w = (lms[right]['x'] * w) - (lms[left]['x'] * w)
 
@@ -214,16 +214,28 @@ function draw_face(landmarks) {
     face.style.left = `${center_x}px`
     face.style.top = `${center_y}px`
 
-    // const left_eye_x = ((lms[eye_l]['x'] * w) - (center_x)) 
-    // const left_eye_y = ((center_y) - (lms[eye_l]['y'] * h))
-    // left_eye.style.left = `${left_eye_x}px`
-    // left_eye.style.top = `${left_eye_y}px`
-    // const right_eye_x = ((lms[eye_r]['x']) * face_w) 
-    // const right_eye_y = (lms[eye_r]['y'] * face_h)
-    // right_eye.style.left = `${left_eye_x}px`
-    // right_eye.style.top = `${left_eye_y}px`
+    const left_eye_x = ((lms[eye_l]['x'] * w) + x) 
+    const left_eye_y = ((lms[eye_l]['y'] * h) + y)
+    left_eye.style.left = `${left_eye_x}px`
+    left_eye.style.top = `${left_eye_y}px`
 
+    const right_eye_x = ((lms[eye_r]['x'] * w) + x) 
+    const right_eye_y = (lms[eye_r]['y'] * h) + y
+    right_eye.style.left = `${right_eye_x}px`
+    right_eye.style.top = `${right_eye_y}px`
+    
+    const mouth_x = ((lms[mouth_top]['x'] * w) + x) 
+    const mouth_y = (lms[mouth_top]['y'] * h ) + y
+    
+    
+    mouth.style.left = `${mouth_x}px`
+    mouth.style.top = `${mouth_y}px`
+    // right_eye.textContent = lms[eye_r]['x']
     // console.log(object);
+    // console.log(lms[nose]['x'] * w);
+    // console.log(lms[eye_l]['x'] * w);
+    // console.log(lms[eye_r]['x'] * w);
+    // console.log('```````object```````');
 
   }
 }
