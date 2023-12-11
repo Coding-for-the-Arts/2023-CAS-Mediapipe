@@ -9,6 +9,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { CustomControls } from './controls.js';
 
 import {
   GestureRecognizer,
@@ -39,7 +40,7 @@ let results = undefined;
 
 
 
-let camera, scene, renderer;
+let camera, scene, renderer, controls;
 
 
 let texture
@@ -90,10 +91,10 @@ function init() {
     x: 0, y: 4, z: 0, scale: 1
   }
 
-  // load_model('models/tena/yann/alien.obj', material, pos);
+  load_model('models/tena/yann/alien.obj', material, pos);
   for (let i = 0; i < 10; i++) {
     const val = i + 1
-    const geometry = new THREE.TorusGeometry(10 + ( val * 10), 3, 16, 100);
+    const geometry = new THREE.TorusGeometry(1 + (val * 2), 0.5, 16, 100);
     const torus = new THREE.Mesh(geometry, material);
     meshes.push(torus)
     scene.add(torus);
@@ -109,10 +110,11 @@ function init() {
 
 
   // CONTROLS
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.maxPolarAngle = Math.PI * 0.495;
-  controls.minDistance = 4;
-  controls.maxDistance = 200;
+  // const controls = new OrbitControls(camera, renderer.domElement);
+  // controls.maxPolarAngle = Math.PI * 0.495;
+  // controls.minDistance = 4;
+  // controls.maxDistance = 200;
+  controls = new CustomControls(camera, renderer.domElement);
   window.addEventListener('resize', onWindowResize);
 }
 
@@ -127,6 +129,7 @@ let inc_4 = 0
 function animate() {
   // recursion
   requestAnimationFrame(animate);
+  // controls.update()
   // animate stuff down here!!!
   if (objects.length > 0) {
     const object = objects[0]
@@ -138,18 +141,19 @@ function animate() {
 
   }
 
-  if(meshes.length > 0){
+  if (meshes.length > 0) {
     for (let i = 0; i < meshes.length; i++) {
       const torus = meshes[i];
-      torus.rotation.x = inc_0 * (i + 1)
+      torus.rotation.x = inc_0 + ((0.5 * Math.PI) / (i + 0.25))
     }
   }
 
   if (water !== undefined) {
+    // console.log('update water');
     water.material.uniforms['time'].value += 1.0 / 60;
   }
 
-  inc_0 += 0.001
+  inc_0 += Math.PI * 0.001
   inc_1 += 0.01
   inc_2 += 0.005
   inc_3 += 0.1
@@ -209,10 +213,13 @@ function load_model(url, material, position, texture) {
 function scene_setup() {
   // load camera
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 5000);
-  camera.position.y = 7.5;
+  camera.position.y = 10.5;
+  camera.position.set(0, 10, -100);
+  camera.lookAt(new THREE.Vector3(0, 0, 0))
+  // camera.rotation.z = 90
   // load scene
   scene = new THREE.Scene();
-  scene.background = new THREE.Color('rgb(51, 255, 51)');
+  // scene.background = new THREE.Color('rgb(51, 255, 51)');
   // scene.fog = new THREE.FogExp2(0xefd1b5, 0.0025);
   // build ambient light
   const ambientLight = new THREE.AmbientLight('rgb(255, 255, 255)'); // rgb(255, 255, 255)
@@ -397,13 +404,12 @@ function build_material(value, metalness, roughness) {
   const rough = roughness || 0
 
   if (typeof value === 'object') {
-    console.log('It is an object.');
+    // console.log('It is an object.');
     obj.r = value.r
     obj.g = value.g
     obj.b = value.b
-    console.log(obj);
   } else if (typeof value === 'number') {
-    console.log('It is a number.');
+    // console.log('It is a number.');
     obj.r = value
     obj.g = value
     obj.b = value
@@ -479,7 +485,7 @@ function skybox() {
       sunColor: 0x000000,
       waterColor: 0x000000,
       distortionScale: 1.7,
-      // fog: scene.fog !== undefined
+      fog: scene.fog !== undefined
     }
   );
 
@@ -592,12 +598,10 @@ async function predict_webcam() {
     ).toFixed(2);
     const handedness = results.handednesses[0][0].displayName;
     if (category_name === 'Pointing_Up') {
-      move_y -= 1
     }
     if (category_name === 'ILoveYou') {
-      move_x += 1
     }
-
+    debug.textContent = `${category_name} with score: ${category_score}`
     // if(category_name === 'Open_Palm') // HOME WORK SET THE SIZE
   }
   if (webcam_running === true) {
@@ -659,7 +663,7 @@ async function setup() {
   // document.body.appendChild(label);
   // document.body.appendChild(confidence);
   // Classify the sound from microphone in real time
-  classifier.classify(gotResult);
+  // classifier.classify(gotResult);
 }
 setup();
 
@@ -675,3 +679,6 @@ function gotResult(error, results) {
   label.textContent = `Label: ${results[0].label}`;
   confidence.textContent = `Confidence: ${results[0].confidence.toFixed(4)}`;
 }
+
+
+
