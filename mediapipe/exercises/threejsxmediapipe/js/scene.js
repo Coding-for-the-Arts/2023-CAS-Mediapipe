@@ -40,6 +40,8 @@ let results = undefined;
 
 
 let camera, scene, renderer;
+
+
 let texture
 let shader_material
 // let object = null;
@@ -70,9 +72,9 @@ const slider = document.querySelector('#color')
 const slider_azymuth = document.querySelector('#azymuth')
 const slider_elevation = document.querySelector('#elevation')
 const canvas = document.querySelector('#c')
-
+const meshes = []
 init();
-
+// it's like setup
 function init() {
   create_gesture_recognizer()
   init_cam()
@@ -80,16 +82,25 @@ function init() {
 
   // const manager = new THREE.LoadingManager(load_manager);
   texture = build_texture('textures/758px-Canestra_di_frutta_(Caravaggio).jpg');
-  const material2 = build_material({ r: 255, g: 51, r: 51 }, 0.3, 0)
+  const material = build_material({ r: 255, g: 51, r: 51 }, 0.5, 0.5)
   const matcap = build_matcap_material('textures/matcaps/512/3B3C3F_DAD9D5_929290_ABACA8-512px.png')
 
 
   let pos = {
-    x: 0, y: 4, z: 0, scale: 3
+    x: 0, y: 4, z: 0, scale: 1
   }
-  // load_model('models/tena/yann/alien.obj', material2, pos);
-  
 
+  // load_model('models/tena/yann/alien.obj', material, pos);
+  for (let i = 0; i < 10; i++) {
+    const val = i + 1
+    const geometry = new THREE.TorusGeometry(10 + ( val * 10), 3, 16, 100);
+    const torus = new THREE.Mesh(geometry, material);
+    meshes.push(torus)
+    scene.add(torus);
+  }
+
+
+  // build renderer
   // build_renderer();
   bloom_pass_composer();
 
@@ -101,7 +112,7 @@ function init() {
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.maxPolarAngle = Math.PI * 0.495;
   controls.minDistance = 4;
-  controls.maxDistance = 40;
+  controls.maxDistance = 200;
   window.addEventListener('resize', onWindowResize);
 }
 
@@ -114,8 +125,9 @@ let inc_3 = 0
 let inc_4 = 0
 
 function animate() {
+  // recursion
   requestAnimationFrame(animate);
-
+  // animate stuff down here!!!
   if (objects.length > 0) {
     const object = objects[0]
     object.rotation.x += 0.008;
@@ -125,6 +137,14 @@ function animate() {
     // updateSun()
 
   }
+
+  if(meshes.length > 0){
+    for (let i = 0; i < meshes.length; i++) {
+      const torus = meshes[i];
+      torus.rotation.x = inc_0 * (i + 1)
+    }
+  }
+
   if (water !== undefined) {
     water.material.uniforms['time'].value += 1.0 / 60;
   }
@@ -192,6 +212,8 @@ function scene_setup() {
   camera.position.y = 7.5;
   // load scene
   scene = new THREE.Scene();
+  scene.background = new THREE.Color('rgb(51, 255, 51)');
+  scene.fog = new THREE.FogExp2(0xefd1b5, 0.0025);
   // build ambient light
   const ambientLight = new THREE.AmbientLight('rgb(255, 255, 255)'); // rgb(255, 255, 255)
   scene.add(ambientLight);
@@ -456,7 +478,7 @@ function skybox() {
       sunColor: 0x000000,
       waterColor: 0x000000,
       distortionScale: 1.7,
-      fog: scene.fog !== undefined
+      // fog: scene.fog !== undefined
     }
   );
 
