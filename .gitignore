@@ -37,3 +37,7 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/macos
 video/*
 video/
+mediapipe/exercises/threejsxmediapipe/models/
+mediapipe/exercises/threejsxmediapipe/models/*
+mediapipe/exercises/threejsxmediapipe/textures/
+mediapipe/exercises/threejsxmediapipe/textures/*
