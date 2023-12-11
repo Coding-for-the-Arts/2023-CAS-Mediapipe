@@ -3,12 +3,28 @@ body {
     padding: 0;
 }
 
+.utils{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 250px;
+}
+
 .video-view,
 .header {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+/* main, .video-view, .media-container, .output_canvas{
+    pointer-events: none;
+} */
+
+main{
+    display: flex;
+    flex-direction: row;
 }
 
 .header {
