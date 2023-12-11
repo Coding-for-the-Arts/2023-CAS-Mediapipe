@@ -35,7 +35,7 @@ main{
 }
 
 .btn {
-    margin-top: 2rem;
+    margin:0.5rem 0;
     cursor: pointer;
     border: solid #33f;
     border-radius: 10px;

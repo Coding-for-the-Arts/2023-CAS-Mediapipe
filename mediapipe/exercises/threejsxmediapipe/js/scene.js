@@ -82,7 +82,7 @@ function init() {
 
   // const manager = new THREE.LoadingManager(load_manager);
   texture = build_texture('textures/758px-Canestra_di_frutta_(Caravaggio).jpg');
-  const material = build_material({ r: 255, g: 51, r: 51 }, 0.5, 0.5)
+  const material = build_material({ r: 255, g: 51, b: 51 }, 0, 1)
   const matcap = build_matcap_material('textures/matcaps/512/3B3C3F_DAD9D5_929290_ABACA8-512px.png')
 
 
@@ -213,7 +213,7 @@ function scene_setup() {
   // load scene
   scene = new THREE.Scene();
   scene.background = new THREE.Color('rgb(51, 255, 51)');
-  scene.fog = new THREE.FogExp2(0xefd1b5, 0.0025);
+  // scene.fog = new THREE.FogExp2(0xefd1b5, 0.0025);
   // build ambient light
   const ambientLight = new THREE.AmbientLight('rgb(255, 255, 255)'); // rgb(255, 255, 255)
   scene.add(ambientLight);
@@ -401,6 +401,7 @@ function build_material(value, metalness, roughness) {
     obj.r = value.r
     obj.g = value.g
     obj.b = value.b
+    console.log(obj);
   } else if (typeof value === 'number') {
     console.log('It is a number.');
     obj.r = value
@@ -409,7 +410,7 @@ function build_material(value, metalness, roughness) {
   } else {
     console.log('It is neither an object nor a number.');
   }
-  const col = `rgb(${obj.r}, ${obj.r}, ${obj.r})`;
+  const col = `rgb(${obj.r}, ${obj.g}, ${obj.b})`;
   const material = new THREE.MeshStandardMaterial({
     color: col,
     metalness: metal,
